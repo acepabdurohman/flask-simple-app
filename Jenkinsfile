@@ -9,6 +9,7 @@ pipeline {
             }
             steps {
                 sh """
+                sudo chown -R $USER /usr/local/lib/python3.6/site-packages/
                 pip install -r requirements.txt
                 """                
             }
