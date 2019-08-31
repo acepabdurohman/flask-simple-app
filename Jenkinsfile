@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh """
                 pip3 install virtualenv
-                virtualenv venv -p python3
+                sudo virtualenv venv -p python3
                 source venv/bin/activate
                 pip3 install -r requirements.txt
                 """                
