@@ -8,9 +8,14 @@ pipeline {
                 }
             }
             steps {
-                sh """
-                pip install -r requirements.txt
-                """                
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'pip install --user -r requirements.txt'
+                }                
+            }
+            post {
+                always {
+                    junit 'output.xml'
+                }
             }
         }
     }
