@@ -9,11 +9,10 @@ pipeline {
             }
             steps {
                 sh """                
-                pip install virtualenv
-                virtualenv --no-site-packages .
-                source bin/activate
+                sudo pip install virtualenv
+                sudo virtualenv -p python3 venv
+                source venv/bin/activate
                 pip install -r app/requirements.pip
-                deactivate
                 """
             }
         }
