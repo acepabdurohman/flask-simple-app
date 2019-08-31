@@ -9,8 +9,8 @@ pipeline {
             }
             steps {
                 sh """                
-                sudo pip install virtualenv
-                sudo virtualenv -p python3 venv
+                pip install virtualenv
+                virtualenv -p python3 venv
                 source venv/bin/activate
                 pip install -r app/requirements.pip
                 """
