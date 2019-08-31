@@ -9,13 +9,12 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'pip install --user -r requirements.txt'
-                    sh 'python app.py'
                 }                
             }
         }
-        stage('Test') {
+        stage('test') {
             steps {
-                sh 'python test_app.py'
+                sh 'python -m unittest test_app.py'
             }
             post {
                 always {
