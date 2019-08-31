@@ -8,7 +8,7 @@ pipeline {
                 }
             }
         }
-        stage('Install dependencies') { 
+        stage('Install_Requirements') { 
             steps {
                 sh """
                 echo ${SHELL}
