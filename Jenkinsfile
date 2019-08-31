@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh """
-                sudo python3.6 -m pip install -r requirements.txt
+                python3.6 -m pip install -r requirements.txt
                 """                
             }
         }
