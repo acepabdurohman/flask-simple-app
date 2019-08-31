@@ -9,8 +9,9 @@ pipeline {
             }
             steps {
                 sh """
+                pip3 install virtualenv
                 virtualenv venv
-                venv/bin/activate
+                source venv/bin/activate
                 pip install --upgrade pip
                 pip install -r requirements.txt
                 make clean
