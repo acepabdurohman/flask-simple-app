@@ -1,14 +1,26 @@
 pipeline {
     agent none 
-    stages {
+    stages {pip install -r requirements.txt
         stage('Build') { 
             agent {
                 docker {
                     image 'python:3.7.2' 
                 }
             }
+        }
+        stage('Install dependencies') { 
             steps {
-                sh 'pip install -r requirements.txt'
+                sh """
+                echo ${SHELL}
+                [ -d venv ] && rm -rf venv
+                #virtualenv --python=python2.7 venv
+                virtualenv venv
+                #. venv/bin/activate
+                export PATH=${VIRTUAL_ENV}/bin:${PATH}
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                make clean
+                """                
             }
         }
         stage('Test') {
