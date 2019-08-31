@@ -9,6 +9,7 @@ pipeline {
             steps {
                 sh 'echo $HOME'
                 withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'echo $HOME'
                     sh 'pip install --user -r requirements.txt'
                 }                
             }
