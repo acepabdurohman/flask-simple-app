@@ -8,8 +8,13 @@ pipeline {
                 }
             }
             steps {
-                sh 'source venv/bin/activate'
-                sh 'pip install -r requirements.txt'
+                sh """                
+                pip install virtualenv
+                virtualenv --no-site-packages .
+                source bin/activate
+                pip install -r app/requirements.pip
+                deactivate
+                """
             }
         }
         stage('test') {
