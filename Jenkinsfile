@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh """
-                pip install --user requirements.txt
+                pip install --user -r requirements.txt
                 """                
             }
         }
