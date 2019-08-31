@@ -12,7 +12,7 @@ pipeline {
                 pip3 install virtualenv
                 sudo virtualenv venv -p python3
                 source venv/bin/activate
-                pip3 install -r requirements.txt
+                pip3 install -r requirements.txt --user
                 """                
             }
         }
