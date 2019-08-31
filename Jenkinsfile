@@ -9,17 +9,8 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'pip install --user -r requirements.txt'
+                    sh 'python test_app.py'
                 }                
-            }
-        }
-        stage('test') {
-            steps {
-                sh 'python -m unittest test_app.py'
-            }
-            post {
-                always {
-                    junit 'test-reports/*.xml'
-                }
             }
         }
     }
