@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh """
-                python3.6 -m pip install flask --user
+                pip install --user requirements.txt
                 """                
             }
         }
