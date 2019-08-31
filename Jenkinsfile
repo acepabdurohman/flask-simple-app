@@ -4,12 +4,12 @@ pipeline {
         stage('Build') { 
             agent {
                 docker {
-                    image 'python:3.7.2' 
+                    image 'python:3.6.8' 
                 }
             }
             steps {
                 sh """
-                python -m pip install -r requirements.txt
+                pip install -r requirements.txt
                 """                
             }
         }
