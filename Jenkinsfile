@@ -1,39 +1,11 @@
-pipeline {
-    agent {
-        docker {
-            image 'python:3.6' 
-        }
+node {
+  stage('SCM') {
+    git 'https://github.com/acepabdurohman/flask-simple-app.git'
+  }
+  stage('SonarQubeScanner') {
+    def scannerHome = tool 'SonarScanner 4.0';
+    withSonarQubeEnv('sonarqube') {
+      sh "${scannerHome}/bin/sonar-scanner"
     }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'echo $HOME'
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'echo $HOME'
-                    sh 'pip install -r requirements.txt'
-                }                
-            }
-        }
-        stage('Test') {
-            steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'python test_app.py'
-                }                
-            }
-            post {
-                always {
-                    junit 'test-reports/*.xml'
-                }
-            }
-        }
-        stage('SonarQube analysis') {
-            steps {
-                withSonarQubeEnv("sonarqube") {
-                    withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
-                }
-            }
-        }
-    }
+  }
 }
