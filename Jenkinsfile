@@ -27,15 +27,10 @@ pipeline {
             }
         }
         stage('SonarQube analysis') {
-            agent any
             steps {
-                script {
-                    def scannerHome = tool 'SonarQubeScanner';
-                    withSonarQubeEnv("sonarqube") {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                    timeout(time: 10, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
+                withSonarQubeEnv("sonarqube") {
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
                     }
                 }
             }
